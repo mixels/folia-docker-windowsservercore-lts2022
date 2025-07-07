@@ -26,8 +26,8 @@ jobs:
 
     - name: Log in to Docker Hub
       run: |
-        $DockerPassword = ${secrets.DOCKER_PASSWORD}
-        $DockerPassword | docker login -u ${secrets.DOCKER_USERNAME} --password-stdin
+        $DockerPassword = ${{secrets.DOCKER_PASSWORD}}
+        $DockerPassword | docker login -u ${{secrets.DOCKER_USERNAME}} --password-stdin
 
     - name: Build the Docker image
       run: docker build --build-arg FOLIA_VERSION=$VERSION -t mixels/folia-gsa-windows:$VERSION .
@@ -67,8 +67,8 @@ jobs:
 
     - name: Log in to Docker Hub
       run: |
-        $DockerPassword = ${secrets.DOCKER_PASSWORD}
-        $DockerPassword | docker login -u ${secrets.DOCKER_USERNAME} --password-stdin
+        $DockerPassword = ${{secrets.DOCKER_PASSWORD}}
+        $DockerPassword | docker login -u ${{secrets.DOCKER_USERNAME}} --password-stdin
 
     - name: Push the Docker image
       run: docker push mixels/folia-gsa-windows:$VERSION
