@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Check out the repository
@@ -20,15 +20,15 @@ jobs:
     - name: Extract version from tag (remove 'v')
       id: get_version
       run: |
-        VERSION=${GITHUB_REF##*/}
-        VERSION=$(echo $VERSION | sed 's/^v//')
-        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        $version = $env:GITHUB_REF -replace '^.*/', ''     # Extract after last slash
+        $version = $version -replace '^v', ''              # Strip leading 'v' if present
+        "VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
 
     - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-
-    - name: Pull base image
-      run: docker pull openjdk:21-windowsservercore-ltsc2022
+      run: |
+        $DockerPassword = $env:DOCKER_PASSWORD
+        $DockerUsername = $env:DOCKER_USERNAME
+        $DockerPassword | docker login -u $DockerUsername --password-stdin
 
     - name: Build the Docker image
       run: docker build --build-arg FOLIA_VERSION=$VERSION -t mixels/folia-gsa-windows:$VERSION .
@@ -43,7 +43,7 @@ jobs:
         path: image.tar
 
   push:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs:
       - build
 
@@ -60,14 +60,17 @@ jobs:
       id: get_version
       run: |
         VERSION=${GITHUB_REF##*/}
-        VERSION=$(echo $VERSION | sed 's/^v//')
-        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        $VERSION = $VERSION -replace '^v', ''
+        Add-Content -Path $env:GITHUB_ENV -Value "VERSION=$VERSION"
 
     - name: Load Docker image
       run: docker load < image.tar
 
     - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      run: |
+        $DockerPassword = $env:DOCKER_PASSWORD
+        $DockerUsername = $env:DOCKER_USERNAME
+        $DockerPassword | docker login -u $DockerUsername --password-stdin
 
     - name: Push the Docker image
       run: docker push mixels/folia-gsa-windows:$VERSION
