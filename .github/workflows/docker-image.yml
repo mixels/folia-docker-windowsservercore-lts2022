@@ -103,7 +103,7 @@ jobs:
       - name: Create a GitHub Issue
         uses: JasonEtco/create-an-issue@v2
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           filename: .github/ISSUE_TEMPLATE.md
 
