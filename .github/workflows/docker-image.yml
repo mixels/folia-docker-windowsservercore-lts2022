@@ -64,7 +64,7 @@ jobs:
         Add-Content -Path $env:GITHUB_ENV -Value "VERSION=$VERSION"
 
     - name: Load Docker image
-      run: Get-Content image.tar | docker load
+      run: Get-Content -Path ".\image.tar" | docker load
 
     - name: Log in to Docker Hub
       run: |
