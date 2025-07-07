@@ -8,7 +8,7 @@ COPY getFolia.ps1 getFolia.ps1
 COPY entrypoint.ps1 entrypoint.ps1
 
 ARG FOLIA_VERSION=latest
-CMD $FOLIA_VERSION | Out-File -FilePath=folia_version
+RUN $FOLIA_VERSION | Out-File -FilePath=folia_version
 
 ENV MIN_RAM=1G
 ENV MAX_RAM=14G
