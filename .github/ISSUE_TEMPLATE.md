@@ -1,6 +1,6 @@
 ---
 title: ❌ CI/CD Pipeline Failed
-assignees: endkind
+assignees: mixels
 labels: workflow-failed
 ---
 
