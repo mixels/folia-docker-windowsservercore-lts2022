@@ -2,7 +2,7 @@ FROM openjdk:21-windowsservercore-ltsc2022
 
 LABEL Author Endkind Ender <endkind.ender@endkind.net>, modified by Mixels
 
-WORKDIR c:\serverfiles
+WORKDIR c:\\serverfiles
 
 COPY getFolia.ps1 getFolia.ps1
 COPY entrypoint.ps1 entrypoint.ps1
