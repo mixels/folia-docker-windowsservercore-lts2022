@@ -54,7 +54,6 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: docker-image
-        path: image.tar
 
     - name: Extract version from tag (remove 'v')
       id: get_version
@@ -64,7 +63,7 @@ jobs:
         Add-Content -Path $env:GITHUB_ENV -Value "VERSION=$VERSION"
 
     - name: Load Docker image
-      run: Get-Content -Path ".\image.tar" | docker load
+      run: docker load -i image.tar
 
     - name: Log in to Docker Hub
       run: |
