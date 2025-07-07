@@ -58,7 +58,7 @@ jobs:
     - name: Extract version from tag (remove 'v')
       id: get_version
       run: |
-        VERSION=${GITHUB_REF##*/}
+        $VERSION = $env:GITHUB_REF -replace '^.*/', ''
         $VERSION = $VERSION -replace '^v', ''
         Add-Content -Path $env:GITHUB_ENV -Value "VERSION=$VERSION"
 
