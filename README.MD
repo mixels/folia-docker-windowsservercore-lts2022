@@ -80,4 +80,4 @@ This project is licensed under the terms of the [GNU General Public License v3.0
 
 ### Other License
 
-This project includes code derived from the [Folia](https://github.com/PaperMC/folia) project and from the [Endkind-Folia](https://github.com/Endkind/folia)} project.
+This project includes code derived from the [Folia](https://github.com/PaperMC/folia) project and from the [Endkind-Folia](https://github.com/Endkind/folia) project.
