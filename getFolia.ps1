@@ -15,5 +15,11 @@ try {
 }
 catch {
     Write-Output "An error occurred while downloading Folia. Please try again or recreate the container."
-    exit 1
+    return $false
+}
+
+if (Test-Path "C:\serverfiles\server.jar") {
+    return $true
+} else {
+    return $false
 }
