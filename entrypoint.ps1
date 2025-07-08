@@ -9,7 +9,9 @@ if (-not (Test-Path -Path "C:\serverfiles\server.jar")) {
 }
 
 while ($true) {
-    java -Xms$env:MIN_RAM -Xmx$env:MAX_RAM $env:JAVA_FLAGS -Dcom.mojang.eula.agree=$env:MINECRAFT_EULA -jar C:\serverfiles\server.jar $env:FOLIA_FLAGS --nogui
+    # Required environment variables: MINECRAFT_EULA
+    # Optional environment variables: MIN_RAM, MAX_RAM, JAVA_FLAGS, FOLIA_FLAGS
+    java -Xms$env:MIN_RAM -Xmx$env:MAX_RAM $env:JAVA_FLAGS "-Dcom.mojang.eula.agree=$env:MINECRAFT_EULA" -jar C:\serverfiles\server.jar $env:FOLIA_FLAGS --nogui
     
     if ($LASTEXITCODE -ne 0) {
         exit 1
