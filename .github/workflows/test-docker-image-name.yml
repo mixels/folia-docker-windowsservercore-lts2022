@@ -11,4 +11,4 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Test
-        run: Write-Host ${{env.DOCKER_IMAGE_NAME}}
+        run: Write-Host ${{ env.DOCKER_IMAGE_NAME }}
