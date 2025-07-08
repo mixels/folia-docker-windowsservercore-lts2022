@@ -1,6 +1,6 @@
 FROM openjdk:21-windowsservercore-ltsc2022
 
-LABEL Author Endkind Ender <endkind.ender@endkind.net>, modified by Mixels
+LABEL Author Mixels <https://github.com/mixels/folia-windowsservercore>
 
 WORKDIR c:\\container
 
