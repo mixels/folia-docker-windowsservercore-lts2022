@@ -1,9 +1,9 @@
 Write-Host "Created by Endkind Ender (www.endkind.net) and modified by Mixels"
 
-if (-not (Test-Path -Path "C:\serverfiles\server.jar")) {
-    & "C:\serverfiles\getFolia.ps1"
+if (-not (Test-Path "C:\serverfiles\server.jar")) {
+    $result = & "C:\serverfiles\getFolia.ps1"
     
-    if ($LASTEXITCODE -ne 0) {
+    if (-Not $result) {
         exit 1
     }
 }
