@@ -1,0 +1,14 @@
+name: Test Docker Image Name
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Test
+        run: Write-Host ${{env.DOCKER_IMAGE_NAME}}
