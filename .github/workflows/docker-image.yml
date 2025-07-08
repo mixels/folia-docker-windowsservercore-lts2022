@@ -30,10 +30,10 @@ jobs:
         $DockerPassword | docker login -u ${{secrets.DOCKER_USERNAME}} --password-stdin
 
     - name: Build the Docker image
-      run: docker build --build-arg FOLIA_VERSION="$env:VERSION" -t "${{var.DOCKER_IMAGE_NAME}}:$env:VERSION" .
+      run: docker build --build-arg FOLIA_VERSION="$env:VERSION" -t "${{vars.DOCKER_IMAGE_NAME}}:$env:VERSION" .
 
     - name: Save Docker image for test job
-      run: docker save ${{var.DOCKER_IMAGE_NAME}}:$env:VERSION > image.tar
+      run: docker save ${{vars.DOCKER_IMAGE_NAME}}:$env:VERSION > image.tar
 
     - name: Upload image artifact
       uses: actions/upload-artifact@v4
@@ -71,7 +71,7 @@ jobs:
         $DockerPassword | docker login -u ${{secrets.DOCKER_USERNAME}} --password-stdin
 
     - name: Push the Docker image
-      run: docker push "${{var.DOCKER_IMAGE_NAME}}:$env:VERSION"
+      run: docker push "${{vars.DOCKER_IMAGE_NAME}}:$env:VERSION"
 
   create-issue-on-failure:
     runs-on: ubuntu-latest
